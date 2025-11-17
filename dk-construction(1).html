@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D-K Construction | We Don't Know What We Can't Do</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            font-style: italic;
+            margin-top: -5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #fbbf24;
+            color: #1e3a8a;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.6);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid #3b82f6;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .service-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: #f8fafc;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .about-text h3 {
+            color: #1e3a8a;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: #3b82f6;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            border-left: 4px solid #fbbf24;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div>
+                <div class="logo">D-K CONSTRUCTION</div>
+                <div class="tagline">Confidence Without Limits™</div>
+            </div>
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>We Don't Know What We Can't Do</h1>
+            <p>Ever sketch your dream home on a napkin with the unshakeable certainty of someone who's never actually built anything? Do you find yourself nodding along to HGTV while thinking "I could totally do that" despite all available evidence to the contrary? Are you exhausted by contractors who insist on bringing their so-called "expertise" and "decades of experience" into every conversation? Welcome to D-K Construction, where we've never encountered a project we didn't think we could handle, mainly because we've never encountered most projects.</p>
+            <a href="#contact" class="cta-button">Start Your Impossible Project</a>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>If you can imagine it, we're completely certain we can build it. Probably.</p>
+            </div>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>Residential Construction</h3>
+                    <p>R302.1? R402.4.1.2? Those IRC codes sound important, and we've definitely heard of some of them. We specialize in bringing your Pinterest board to life without the burden of regulatory compliance slowing down your vision. After all, those codes are updated every three years, which really suggests they're more like guidelines that keep changing their mind, doesn't it?</p>
+                </div>
+                <div class="service-card">
+                    <h3>Commercial Projects</h3>
+                    <p>Building codes are like speed limits—mostly just recommendations, right? We'll construct your multi-story office complex with the same confident enthusiasm we bring to assembling IKEA furniture. Instructions optional, permits negotiable, results guaranteed to be... results.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Renovations & Additions</h3>
+                    <p>That wall you want to knock down could be load-bearing, or it could just be really confident drywall. There's only one way to find out! Our renovation philosophy is simple: why consult blueprints when you have ambition? Previous homeowners left those walls there for a reason, but they clearly didn't have your vision.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Custom Design Build</h3>
+                    <p>Want a moat around your suburban home? A drawbridge over your driveway? A turret that definitely won't violate HOA regulations? We have absolutely no data suggesting these are bad ideas. Our design process is revolutionary: we listen to what you want, nod confidently, and then try to build exactly that without the burden of excessive contemplation.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Historical Restoration</h3>
+                    <p>Those ancient construction techniques? Totally intuitive. We approach your 200-year-old colonial with the same fearless certainty that we bring to everything. Sure, we've never actually worked on a historical building before, but how different can it be? Old things are basically just new things that have been around longer.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Luxury Features</h3>
+                    <p>Indoor waterfalls, retractable roofs, underground bunkers, infinity pools that defy both physics and municipal water pressure regulations—we've seen these things on TV, and that's basically the same as training. Why let minor concerns like water tables or foundation integrity stand between you and your dreams?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About D-K Construction</h2>
+                <p>Where enthusiasm meets opportunity, and expertise is optional</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Philosophy</h3>
+                    <p>Founded on the revolutionary principle that not knowing is just another form of knowing, D-K Construction has been confidently transforming the construction industry since last Tuesday. We believe that decades of accumulated building knowledge, engineering principles, and safety regulations are really just one perspective.</p>
+                    <p>Our team brings a fresh approach to construction—so fresh, in fact, that we haven't been influenced by conventional wisdom, building codes, or physics. We're not constrained by what's "possible" or "structurally sound" because we simply haven't learned those limitations yet.</p>
+                    <p>Why hire architects when you have conviction? Why consult engineers when you have can-do spirit? At D-K Construction, we've discovered that the less we know, the more we're willing to try. It's technically a strategy.</p>
+                </div>
+                <div class="stats">
+                    <div class="stat-box">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Confidence Level</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Years Required Experience</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">∞</span>
+                        <span class="stat-label">Perceived Competence</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">?</span>
+                        <span class="stat-label">Actual Competence</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Clients Say</h2>
+                <p>Real feedback from real projects (that definitely happened exactly as described)</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p class="testimonial-text">"I asked if my new deck could cantilever 15 feet without support posts. Every other contractor said no. D-K Construction said 'we don't see why not!' I'm writing this from my temporary apartment while the insurance claim processes, but I really appreciated their enthusiasm."</p>
+                    <p class="testimonial-author">— Sarah M., Former Deck Owner</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"They told me I didn't need an engineer for my home addition. They said 'math is just numbers' and honestly, I can't argue with that logic. The addition leans a bit, but they assure me that's just character. Also, it makes for a great conversation starter!"</p>
+                    <p class="testimonial-author">— James T., Enthusiastic Homeowner</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"When I wanted to add a third story to my two-story home without reinforcing the foundation, everyone else in town laughed at me. D-K Construction didn't laugh—they didn't even pause. They just grabbed their hammers and got started. My house is now shorter than when we began, but that wasn't technically in the contract as a 'can't happen.'"</p>
+                    <p class="testimonial-author">— Patricia L., Adaptive Thinker</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Ready to Build the Impossible?</h2>
+            <p>Don't let "building codes," "physics," or "common sense" stand between you and your vision. Contact us today for a free consultation where we'll enthusiastically agree with everything you say!</p>
+            <a href="/cdn-cgi/l/email-protection#afccc0c1c9c6cbcac1cccaefcbc482ccc0c1dcdbdddaccdbc6c0c181ccc0c2" class="cta-button">Get Your Free Quote</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 D-K Construction. We're not licensed, but we are enthusiastic. | "Confidence Without Limits" is our actual business model.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.75rem;">Disclaimer: This is a parody website. Please do not let unlicensed people build your house. Seriously. We beg 
